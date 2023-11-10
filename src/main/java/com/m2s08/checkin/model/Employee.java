@@ -1,5 +1,6 @@
 package com.m2s08.checkin.model;
 
+import com.m2s08.checkin.model.transport.CreateEmployeeDTO;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -27,10 +28,10 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String name, String office, Double wage) {
-        this.name = name;
-        this.office = office;
-        this.wage = wage;
+    public Employee(CreateEmployeeDTO body) {
+        this.name = body.name();
+        this.office = body.office();
+        this.wage = body.wage();
     }
 
 
