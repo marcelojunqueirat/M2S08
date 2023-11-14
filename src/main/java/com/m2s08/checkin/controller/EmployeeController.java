@@ -1,6 +1,7 @@
 package com.m2s08.checkin.controller;
 
 import com.m2s08.checkin.model.transport.CreateEmployeeDTO;
+import com.m2s08.checkin.model.transport.CreateRegisterdDTO;
 import com.m2s08.checkin.model.transport.DetailedEmployeeDTO;
 import com.m2s08.checkin.model.transport.GeneralEmployeeDTO;
 import com.m2s08.checkin.service.EmployeeService;
@@ -38,6 +39,12 @@ public class EmployeeController {
     public ResponseEntity<DetailedEmployeeDTO> getById(@PathVariable("id") Long id) {
         DetailedEmployeeDTO response = this.employeeService.getEmployee(id);
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/{id}/register")
+    public ResponseEntity<CreateRegisterdDTO> createRegister(@PathVariable("id") Long id, @RequestBody @Valid CreateRegisterdDTO body) {
+        CreateRegisterdDTO response = this.employeeService.createRegister(id, body);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
 }

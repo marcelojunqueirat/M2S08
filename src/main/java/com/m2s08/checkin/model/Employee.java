@@ -1,6 +1,7 @@
 package com.m2s08.checkin.model;
 
 import com.m2s08.checkin.model.transport.CreateEmployeeDTO;
+import com.m2s08.checkin.model.transport.CreateRegisterdDTO;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -69,5 +70,9 @@ public class Employee {
 
     public List<Register> getRegisters() {
         return registers;
+    }
+
+    public List<CreateRegisterdDTO> getRegisterAsObject() {
+        return this.registers.stream().map(CreateRegisterdDTO::new).toList();
     }
 }
