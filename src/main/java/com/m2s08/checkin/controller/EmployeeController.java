@@ -1,6 +1,7 @@
 package com.m2s08.checkin.controller;
 
 import com.m2s08.checkin.model.transport.CreateEmployeeDTO;
+import com.m2s08.checkin.model.transport.DetailedEmployeeDTO;
 import com.m2s08.checkin.model.transport.GeneralEmployeeDTO;
 import com.m2s08.checkin.service.EmployeeService;
 import jakarta.validation.Valid;
@@ -30,6 +31,12 @@ public class EmployeeController {
     @GetMapping
     public ResponseEntity<Page<GeneralEmployeeDTO>> list(@PageableDefault(size = 12, sort = "name") Pageable pageable) {
         Page<GeneralEmployeeDTO> response = this.employeeService.listAll(pageable);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DetailedEmployeeDTO> getById(@PathVariable("id") Long id) {
+        DetailedEmployeeDTO response = this.employeeService.getEmployee(id);
         return ResponseEntity.ok(response);
     }
 

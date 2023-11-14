@@ -2,6 +2,7 @@ package com.m2s08.checkin.service;
 
 import com.m2s08.checkin.model.Employee;
 import com.m2s08.checkin.model.transport.CreateEmployeeDTO;
+import com.m2s08.checkin.model.transport.DetailedEmployeeDTO;
 import com.m2s08.checkin.model.transport.GeneralEmployeeDTO;
 import com.m2s08.checkin.repository.EmployeeRepository;
 import org.springframework.data.domain.Page;
@@ -24,7 +25,12 @@ public class EmployeeService {
         return new GeneralEmployeeDTO(newEmployee);
     }
 
-    public Page<GeneralEmployeeDTO> listAll(Pageable pageable){
+    public Page<GeneralEmployeeDTO> listAll(Pageable pageable) {
         return this.employeeRepository.findAll(pageable).map(GeneralEmployeeDTO::new);
+    }
+
+    public DetailedEmployeeDTO getEmployee(Long id) {
+        return this.employeeRepository.findById(id).map(DetailedEmployeeDTO::new)
+                .orElseThrow(()-> new IllegalArgumentException("Employee with id not found: " + id));
     }
 }
